@@ -39,6 +39,14 @@ src/problem5/
    MONGODB_URI=mongodb://localhost:27017/resourcedb
    ```
 
+   You can also copy the provided `.env.example` file as a starting point:
+
+   ```
+   cp .env.example .env
+   ```
+
+   Then update the values as needed for your environment.
+
 3. Build the TypeScript code:
    ```
    npm run build
