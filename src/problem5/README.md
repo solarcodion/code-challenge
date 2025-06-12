@@ -68,6 +68,28 @@ npm run dev
 | PUT    | /api/resources/:id | Update a resource                          |
 | DELETE | /api/resources/:id | Delete a resource                          |
 
+## Testing with Postman
+
+A Postman collection file (`code_challenge.postman_collection.json`) is included in the project root. You can use this to test the API endpoints:
+
+1. Import the collection into Postman:
+
+   - Open Postman
+   - Click on "Import" button
+   - Select the `code_challenge.postman_collection.json` file
+
+2. The collection includes pre-configured requests for all endpoints:
+
+   - Get all resources
+   - Get a specific resource
+   - Create a new resource
+   - Update a resource
+   - Delete a resource
+
+3. Make sure your server is running before testing the endpoints.
+
+4. The collection includes test scripts to validate responses.
+
 ## Example Usage
 
 ### Create a resource
