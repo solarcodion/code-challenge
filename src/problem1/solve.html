@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sum to N - Problem 1</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .input-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        align-items: center;
+        justify-content: center;
+      }
+      input {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      button {
+        padding: 8px 16px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #2980b9;
+      }
+      .result {
+        margin-top: 15px;
+        padding: 15px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #3498db;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sum to N - Problem 1</h1>
+
+    <div class="input-container">
+      <label for="number-input">Enter a number:</label>
+      <input type="number" id="number-input" value="5" min="1" />
+      <button onclick="calculateSums()">Calculate</button>
+    </div>
+
+    <div class="result" id="loop-result"></div>
+    <div class="result" id="formula-result"></div>
+    <div class="result" id="recursion-result"></div>
+
+    <script>
+      // Implementation 1: Using a for loop
+      function sum_to_n_loop(n) {
+        let sum = 0;
+        for (let i = 1; i <= n; i++) {
+          sum += i;
+        }
+        return sum;
+      }
+
+      // Implementation 2: Using the mathematical formula n*(n+1)/2
+      function sum_to_n_formula(n) {
+        return (n * (n + 1)) / 2;
+      }
+
+      // Implementation 3: Using recursion
+      function sum_to_n_recursion(n) {
+        if (n <= 0) return 0;
+        return n + sum_to_n_recursion(n - 1);
+      }
+
+      function calculateSums() {
+        const n = parseInt(document.getElementById("number-input").value);
+
+        document.getElementById(
+          "loop-result"
+        ).textContent = `Loop implementation: sum_to_n(${n}) = ${sum_to_n_loop(
+          n
+        )}`;
+
+        document.getElementById(
+          "formula-result"
+        ).textContent = `Formula implementation: sum_to_n(${n}) = ${sum_to_n_formula(
+          n
+        )}`;
+
+        document.getElementById(
+          "recursion-result"
+        ).textContent = `Recursion implementation: sum_to_n(${n}) = ${sum_to_n_recursion(
+          n
+        )}`;
+      }
+
+      // Calculate on page load
+      calculateSums();
+    </script>
+  </body>
+</html>
