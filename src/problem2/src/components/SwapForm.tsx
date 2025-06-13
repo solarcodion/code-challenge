@@ -89,7 +89,6 @@ export default function SwapForm() {
       fromAmount: value,
     }));
 
-    // Clear error when user types
     if (errors.fromAmount) {
       setErrors((prev) => ({
         ...prev,
@@ -132,7 +131,6 @@ export default function SwapForm() {
     setIsSwapping(true);
     setSlideDirection("down");
 
-    // Add a small delay to allow the animation to start
     setTimeout(() => {
       setFormData((prev) => ({
         ...prev,
@@ -142,7 +140,6 @@ export default function SwapForm() {
         toAmount: prev.fromAmount,
       }));
 
-      // Reset the animation state after swap is complete
       setTimeout(() => {
         setIsSwapping(false);
         setSlideDirection(null);
