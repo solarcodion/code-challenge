@@ -8,27 +8,33 @@
 }
 
 body {
-  @apply bg-background text-white min-h-screen;
+  background-color: theme("colors.background");
+  color: white;
+  min-height: 100vh;
 }
 
 @layer components {
-  .input-field {
-    @apply w-full bg-card border border-gray-700 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-accent;
-  }
-
-  .btn {
-    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background;
+  body {
+    background-color: theme("colors.background");
+    color: white;
+    min-height: 100vh;
   }
 
   .btn-primary {
-    @apply btn bg-primary hover:bg-blue-600 text-white focus:ring-primary;
+    @apply bg-primary hover:bg-blue-500 text-white font-medium py-2 px-4 rounded-lg transition-colors;
   }
 
-  .btn-secondary {
-    @apply btn bg-secondary hover:bg-green-600 text-white focus:ring-secondary;
+  .input-field {
+    @apply bg-gray-800 border border-gray-700 rounded-lg p-3 text-white w-full focus:outline-none focus:ring-2 focus:ring-accent;
   }
 
   .card {
-    @apply bg-card rounded-xl shadow-lg p-6 border border-gray-700;
+    @apply bg-card rounded-xl p-6 shadow-lg border border-gray-700;
+  }
+}
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 }
