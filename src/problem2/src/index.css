@@ -37,4 +37,47 @@ body {
   .animate-pulse-slow {
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
+
+  .animate-rotate-180 {
+    animation: rotate-180 0.3s ease-in-out forwards;
+  }
+
+  .animate-slide-down {
+    animation: slide-down 0.3s ease-in-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-in-out forwards;
+  }
+
+  @keyframes rotate-180 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(180deg);
+    }
+  }
+
+  @keyframes slide-down {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
 }

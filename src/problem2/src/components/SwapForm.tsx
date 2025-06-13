@@ -24,6 +24,10 @@ export default function SwapForm() {
     fromAmount: "",
     general: "",
   });
+  const [isSwapping, setIsSwapping] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<"up" | "down" | null>(
+    null
+  );
 
   useEffect(() => {
     async function loadTokens() {
@@ -125,13 +129,25 @@ export default function SwapForm() {
   };
 
   const handleSwapTokens = () => {
-    setFormData((prev) => ({
-      ...prev,
-      fromToken: prev.toToken,
-      toToken: prev.fromToken,
-      fromAmount: prev.toAmount,
-      toAmount: prev.fromAmount,
-    }));
+    setIsSwapping(true);
+    setSlideDirection("down");
+
+    // Add a small delay to allow the animation to start
+    setTimeout(() => {
+      setFormData((prev) => ({
+        ...prev,
+        fromToken: prev.toToken,
+        toToken: prev.fromToken,
+        fromAmount: prev.toAmount,
+        toAmount: prev.fromAmount,
+      }));
+
+      // Reset the animation state after swap is complete
+      setTimeout(() => {
+        setIsSwapping(false);
+        setSlideDirection(null);
+      }, 10);
+    }, 300);
   };
 
   const validateForm = (): boolean => {
@@ -228,20 +244,26 @@ export default function SwapForm() {
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="space-y-6">
-            <TokenSelector
-              tokens={tokens}
-              selectedToken={formData.fromToken}
-              onSelectToken={handleSelectFromToken}
-              label="From"
-            />
+            <div
+              className={`transition-all duration-300 ${
+                slideDirection === "down" ? "animate-slide-down" : ""
+              }`}
+            >
+              <TokenSelector
+                tokens={tokens}
+                selectedToken={formData.fromToken}
+                onSelectToken={handleSelectFromToken}
+                label="From"
+              />
 
-            <AmountInput
-              value={formData.fromAmount}
-              onChange={handleFromAmountChange}
-              token={formData.fromToken}
-              label="Amount"
-              error={errors.fromAmount}
-            />
+              <AmountInput
+                value={formData.fromAmount}
+                onChange={handleFromAmountChange}
+                token={formData.fromToken}
+                label="Amount"
+                error={errors.fromAmount}
+              />
+            </div>
 
             <div className="relative flex justify-center my-2">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -249,27 +271,36 @@ export default function SwapForm() {
               </div>
               <button
                 type="button"
-                className="relative z-10 bg-accent hover:bg-indigo-500 text-white rounded-full p-2 shadow-lg transform transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background focus:ring-accent"
+                className={`relative z-10 bg-accent hover:bg-indigo-500 text-white rounded-full p-2 shadow-lg transform transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background focus:ring-accent ${
+                  isSwapping ? "animate-rotate-180" : ""
+                }`}
                 onClick={handleSwapTokens}
+                disabled={isSwapping}
               >
                 <CgArrowsExchangeAltV size={20} />
               </button>
             </div>
 
-            <TokenSelector
-              tokens={tokens}
-              selectedToken={formData.toToken}
-              onSelectToken={handleSelectToToken}
-              label="To"
-            />
+            <div
+              className={`transition-all duration-300 ${
+                slideDirection === "down" ? "animate-slide-up" : ""
+              }`}
+            >
+              <TokenSelector
+                tokens={tokens}
+                selectedToken={formData.toToken}
+                onSelectToken={handleSelectToToken}
+                label="To"
+              />
 
-            <AmountInput
-              value={formData.toAmount}
-              onChange={() => {}}
-              token={formData.toToken}
-              label="You will receive"
-              readOnly
-            />
+              <AmountInput
+                value={formData.toAmount}
+                onChange={() => {}}
+                token={formData.toToken}
+                label="You will receive"
+                readOnly
+              />
+            </div>
 
             {formData.fromToken && formData.toToken && (
               <div className="text-sm text-gray-400 text-right mt-2">
